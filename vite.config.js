@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [vue()],
   define: {
     'process.env': {},
+    global: 'globalThis'
   },
   optimizeDeps: {
     esbuildOptions: {
