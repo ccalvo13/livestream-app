@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
-import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -66,7 +66,8 @@ export default defineConfig({
                 process: true,
                 buffer: true
             }),
-            NodeModulesPolyfillPlugin()
+            NodeModulesPolyfillPlugin(),
+            esbuildCommonjs(['simple-signal-client']) 
         ]
     }
   },
