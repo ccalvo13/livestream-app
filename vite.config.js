@@ -17,7 +17,7 @@ export default defineConfig({
       exposes: {
         "./App": "./src/App.vue",
       },
-      shared: ["vue", "axios", "material-design-icons-iconfont", "socket.io-client", "vue-webrtc-v1", "vuetify"],
+      shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
     })
   ],
   define: {
