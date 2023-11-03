@@ -78,6 +78,9 @@ export default defineConfig({
               // used during production bundling
               rollupNodePolyFill()
           ]
-      }
+      },
+      commonjsOptions: {
+        transformMixedEsModules: true,
+      },
   }
 })
