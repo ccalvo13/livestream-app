@@ -4,12 +4,21 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
+import federation from '@originjs/vite-plugin-federation'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    viteCommonjs()
+    viteCommonjs(),
+    federation({
+      name: "livestream",
+      filename: "livestreamApp.js",
+      exposes: {
+        "./App": "./src/App.vue",
+      },
+      shared: ["vue"],
+    })
   ],
   define: {
     'process.env': {},
@@ -72,15 +81,16 @@ export default defineConfig({
     }
   },
   build: {
-      rollupOptions: {
-          plugins: [
-              // Enable rollup polyfills plugin
-              // used during production bundling
-              rollupNodePolyFill()
-          ]
-      },
-      commonjsOptions: {
-        transformMixedEsModules: true,
-      },
+    target: 'esnext',
+    rollupOptions: {
+        plugins: [
+            // Enable rollup polyfills plugin
+            // used during production bundling
+            rollupNodePolyFill()
+        ]
+    },
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   }
 })
