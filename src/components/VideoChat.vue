@@ -68,6 +68,10 @@
     const socket = io('https://livestream-backend-ng53ixt7xq-as.a.run.app');
     import { VueWebRTC } from 'vue-webrtc-v1'; 
 
+    import 'vuetify/dist/vuetify.min.css'
+    import '@mdi/font/css/materialdesignicons.css'
+    import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
     export default {
         name: 'demo-component',
         components: {
