@@ -19,6 +19,7 @@
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "@vitejs/plugin-vue": "^4.2.3",
     "axios": "^1.6.0",
     "socket.io-client": "^4.7.2",
