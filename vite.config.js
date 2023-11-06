@@ -10,9 +10,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
-        template: {transformAssetUrls}
-    }),
+    vue(),
     vuetify({ autoImport: true }),
     viteCommonjs(),
     federation({
