@@ -10,7 +10,9 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+        template: {transformAssetUrls}
+    }),
     vuetify({ autoImport: true }),
     viteCommonjs(),
     federation({
@@ -84,6 +86,8 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+    minify: false, 
+    cssCodeSplit: false,
     rollupOptions: {
         plugins: [
             // Enable rollup polyfills plugin
