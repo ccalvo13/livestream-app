@@ -24,6 +24,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "axios": "^1.6.0",
     "socket.io-client": "^4.7.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-vuetify": "^1.0.2"
   }
 }

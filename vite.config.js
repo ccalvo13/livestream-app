@@ -5,6 +5,7 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import federation from '@originjs/vite-plugin-federation'
+import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,7 +19,8 @@ export default defineConfig({
         "./App": "./src/App.vue",
       },
       shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
-    })
+    }),
+    vuetify({ autoImport: true })
   ],
   define: {
     'process.env': {},
