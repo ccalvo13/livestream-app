@@ -11,6 +11,7 @@ import vuetify from 'vite-plugin-vuetify'
 export default defineConfig({
   plugins: [
     vue(),
+    vuetify({ autoImport: true }),
     viteCommonjs(),
     federation({
       name: "livestream",
@@ -19,8 +20,7 @@ export default defineConfig({
         "./App": "./src/App.vue",
       },
       shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
-    }),
-    vuetify({ autoImport: true })
+    })
   ],
   define: {
     'process.env': {},
