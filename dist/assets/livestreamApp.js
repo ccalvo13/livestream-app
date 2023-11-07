@@ -1,1 +1,43 @@
-import{_ as i}from"./preload-helper-cf010ec4.js";const c=new Set(["Module","__esModule","default","_export_sfc"]);let l={"./App":()=>(d(["App-94451ae8.css"]),h("./__federation_expose_App-c82da6b9.js").then(e=>Object.keys(e).every(t=>c.has(t))?()=>e.default:()=>e))};const a={},d=e=>{const t=import.meta.url;if(typeof t>"u"){console.warn('The remote style takes effect only when the build.target option in the vite.config.ts file is higher than that of "es2020".');return}const r=t.substring(0,t.lastIndexOf("livestreamApp.js"));e.forEach(n=>{const s=r+n;if(s in a)return;a[s]=!0;const o=document.head.appendChild(document.createElement("link"));o.href=s,o.rel="stylesheet"})};async function h(e){return i(()=>import(e),[])}const p=e=>l[e](),u=e=>{globalThis.__federation_shared__=globalThis.__federation_shared__||{},Object.entries(e).forEach(([t,r])=>{const n=Object.keys(r)[0],s=Object.values(r)[0],o=s.scope||"default";globalThis.__federation_shared__[o]=globalThis.__federation_shared__[o]||{};const _=globalThis.__federation_shared__[o];(_[t]=_[t]||{})[n]=s})};export{d as dynamicLoadingCss,p as get,u as init};
+import { _ as __vitePreload } from './preload-helper.4cee51f5.js';
+
+const exportSet = new Set(['Module', '__esModule', 'default', '_export_sfc']);
+      let moduleMap = {
+"./App":()=>{
+      dynamicLoadingCss(["style.1396f108.css"]);
+      return __federation_import('./__federation_expose_App.1669ec6c.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+    const seen = {};
+    const dynamicLoadingCss = (cssFilePaths) => {
+      const metaUrl = import.meta.url;
+      if (typeof metaUrl == 'undefined') {
+        console.warn('The remote style takes effect only when the build.target option in the vite.config.ts file is higher than that of "es2020".');
+        return
+      }
+      const curUrl = metaUrl.substring(0, metaUrl.lastIndexOf('livestreamApp.js'));
+
+      cssFilePaths.forEach(cssFilePath => {
+        const href = curUrl + cssFilePath;
+        if (href in seen) return
+        seen[href] = true;
+        const element = document.head.appendChild(document.createElement('link'));
+        element.href = href;
+        element.rel = 'stylesheet';
+      });
+    };
+    async function __federation_import(name) {
+        return __vitePreload(() => import(name),true?[]:void 0);
+    }    const get =(module) => {
+        return moduleMap[module]();
+    };
+    const init =(shareScope) => {
+      globalThis.__federation_shared__= globalThis.__federation_shared__|| {};
+      Object.entries(shareScope).forEach(([key, value]) => {
+        const versionKey = Object.keys(value)[0];
+        const versionValue = Object.values(value)[0];
+        const scope = versionValue.scope || 'default';
+        globalThis.__federation_shared__[scope] = globalThis.__federation_shared__[scope] || {};
+        const shared= globalThis.__federation_shared__[scope];
+        (shared[key] = shared[key]||{})[versionKey] = versionValue;
+      });
+    };
+
+export { dynamicLoadingCss, get, init };

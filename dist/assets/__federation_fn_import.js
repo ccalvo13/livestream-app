@@ -1,1 +1,410 @@
-import{_ as M}from"./preload-helper-cf010ec4.js";const E="[0-9A-Za-z-]+",V=`(?:\\+(${E}(?:\\.${E})*))`,R="0|[1-9]\\d*",h="[0-9]+",z="\\d*[a-zA-Z-][a-zA-Z0-9-]*",S=`(?:${h}|${z})`,N=`(?:-?(${S}(?:\\.${S})*))`,X=`(?:${R}|${z})`,Z=`(?:-(${X}(?:\\.${X})*))`,x=`${R}|x|X|\\*`,_=`[v=\\s]*(${x})(?:\\.(${x})(?:\\.(${x})(?:${Z})?${V}?)?)?`,J=`^\\s*(${_})\\s+-\\s+(${_})\\s*$`,Q=`(${h})\\.(${h})\\.(${h})`,W=`[v=\\s]*${Q}${N}?${V}?`,y="((?:<|>)?=?)",Y=`(\\s*)${y}\\s*(${W}|${_})`,F="(?:~>?)",m=`(\\s*)${F}\\s+`,B="(?:\\^)",j=`(\\s*)${B}\\s+`,A="(<|>)?=?\\s*\\*",ee=`^${B}${_}$`,re=`(${R})\\.(${R})\\.(${R})`,te=`v?${re}${Z}?${V}?`,ne=`^${F}${_}$`,se=`^${y}\\s*${_}$`,ie=`^${y}\\s*(${te})$|^$`,ue="^\\s*>=\\s*0.0.0\\s*$";function l(e){return new RegExp(e)}function $(e){return!e||e.toLowerCase()==="x"||e==="*"}function D(...e){return n=>e.reduce((i,r)=>r(i),n)}function q(e){return e.match(l(ie))}function k(e,n,i,r){const t=`${e}.${n}.${i}`;return r?`${t}-${r}`:t}function $e(e){return e.replace(l(J),(n,i,r,t,s,u,c,a,o,f,v,d)=>($(r)?i="":$(t)?i=`>=${r}.0.0`:$(s)?i=`>=${r}.${t}.0`:i=`>=${i}`,$(o)?a="":$(f)?a=`<${+o+1}.0.0-0`:$(v)?a=`<${o}.${+f+1}.0-0`:d?a=`<=${o}.${f}.${v}-${d}`:a=`<=${a}`,`${i} ${a}`.trim()))}function ce(e){return e.replace(l(Y),"$1$2$3")}function ae(e){return e.replace(l(m),"$1~")}function oe(e){return e.replace(l(j),"$1^")}function fe(e){return e.trim().split(/\s+/).map(n=>n.replace(l(ee),(i,r,t,s,u)=>$(r)?"":$(t)?`>=${r}.0.0 <${+r+1}.0.0-0`:$(s)?r==="0"?`>=${r}.${t}.0 <${r}.${+t+1}.0-0`:`>=${r}.${t}.0 <${+r+1}.0.0-0`:u?r==="0"?t==="0"?`>=${r}.${t}.${s}-${u} <${r}.${t}.${+s+1}-0`:`>=${r}.${t}.${s}-${u} <${r}.${+t+1}.0-0`:`>=${r}.${t}.${s}-${u} <${+r+1}.0.0-0`:r==="0"?t==="0"?`>=${r}.${t}.${s} <${r}.${t}.${+s+1}-0`:`>=${r}.${t}.${s} <${r}.${+t+1}.0-0`:`>=${r}.${t}.${s} <${+r+1}.0.0-0`)).join(" ")}function le(e){return e.trim().split(/\s+/).map(n=>n.replace(l(ne),(i,r,t,s,u)=>$(r)?"":$(t)?`>=${r}.0.0 <${+r+1}.0.0-0`:$(s)?`>=${r}.${t}.0 <${r}.${+t+1}.0-0`:u?`>=${r}.${t}.${s}-${u} <${r}.${+t+1}.0-0`:`>=${r}.${t}.${s} <${r}.${+t+1}.0-0`)).join(" ")}function de(e){return e.split(/\s+/).map(n=>n.trim().replace(l(se),(i,r,t,s,u,c)=>{const a=$(t),o=a||$(s),f=o||$(u);return r==="="&&f&&(r=""),c="",a?r===">"||r==="<"?"<0.0.0-0":"*":r&&f?(o&&(s=0),u=0,r===">"?(r=">=",o?(t=+t+1,s=0,u=0):(s=+s+1,u=0)):r==="<="&&(r="<",o?t=+t+1:s=+s+1),r==="<"&&(c="-0"),`${r+t}.${s}.${u}${c}`):o?`>=${t}.0.0${c} <${+t+1}.0.0-0`:f?`>=${t}.${s}.0${c} <${t}.${+s+1}.0-0`:i})).join(" ")}function pe(e){return e.trim().replace(l(A),"")}function _e(e){return e.trim().replace(l(ue),"")}function w(e,n){return e=+e||e,n=+n||n,e>n?1:e===n?0:-1}function Re(e,n){const{preRelease:i}=e,{preRelease:r}=n;if(i===void 0&&r)return 1;if(i&&r===void 0)return-1;if(i===void 0&&r===void 0)return 0;for(let t=0,s=i.length;t<=s;t++){const u=i[t],c=r[t];if(u!==c)return u===void 0&&c===void 0?0:u?c?w(u,c):-1:1}return 0}function g(e,n){return w(e.major,n.major)||w(e.minor,n.minor)||w(e.patch,n.patch)||Re(e,n)}function P(e,n){return e.version===n.version}function ve(e,n){switch(e.operator){case"":case"=":return P(e,n);case">":return g(e,n)<0;case">=":return P(e,n)||g(e,n)<0;case"<":return g(e,n)>0;case"<=":return P(e,n)||g(e,n)>0;case void 0:return!0;default:return!1}}function ge(e){return D(fe,le,de,pe)(e)}function he(e){return D($e,ce,ae,oe)(e.trim()).split(/\s+/).join(" ")}function we(e,n){if(!e)return!1;const t=he(n).split(" ").map(d=>ge(d)).join(" ").split(/\s+/).map(d=>_e(d)),s=q(e);if(!s)return!1;const[,u,,c,a,o,f]=s,v={operator:u,version:k(c,a,o,f),major:c,minor:a,patch:o,preRelease:f?.split(".")};for(const d of t){const C=q(d);if(!C)return!1;const[,H,,I,O,U,b]=C,K={operator:H,version:k(I,O,U,b),major:I,minor:O,patch:U,preRelease:b?.split(".")};if(!ve(K,v))return!1}return!0}const L={vue:{get:()=>()=>p(new URL("__federation_shared_vue-6a2c2ada.js",import.meta.url).href),import:!0},axios:{get:()=>()=>p(new URL("__federation_shared_axios-dbb8467a.js",import.meta.url).href),import:!0},"material-design-icons-iconfont/dist/material-design-icons.css":{get:()=>()=>p(new URL("__federation_shared_material-design-icons-iconfont/dist/material-design-icons.css-e8e32fb1.js",import.meta.url).href),import:!0},"socket.io-client":{get:()=>()=>p(new URL("__federation_shared_socket.io-client-1ae494f4.js",import.meta.url).href),import:!0},"vue-webrtc-v1":{get:()=>()=>p(new URL("__federation_shared_vue-webrtc-v1-9eba3861.js",import.meta.url).href),import:!0},vuetify:{get:()=>()=>p(new URL("__federation_shared_vuetify-952f4fed.js",import.meta.url).href),import:!0},"@mdi/font/css/materialdesignicons.css":{get:()=>()=>p(new URL("__federation_shared_@mdi/font/css/materialdesignicons.css-d72bf947.js",import.meta.url).href),import:!0}},T=Object.create(null);async function Pe(e,n="default"){return T[e]?new Promise(i=>i(T[e])):await Le(e,n)||be(e)}async function p(e){return M(()=>import(e),[])}async function Le(e,n){let i=null;if(globalThis?.__federation_shared__?.[n]?.[e]){const r=globalThis.__federation_shared__[n][e],t=Object.keys(r)[0],s=Object.values(r)[0];L[e]?.requiredVersion?we(t,L[e].requiredVersion)?i=await(await s.get())():console.log(`provider support ${e}(${t}) is not satisfied requiredVersion(\${moduleMap[name].requiredVersion})`):i=await(await s.get())()}if(i)return G(i,e)}async function be(e){if(L[e]?.import){let n=await(await L[e].get())();return G(n,e)}else console.error("consumer config import=false,so cant use callback shared module")}function G(e,n){return e.default&&(e=Object.assign({},e.default,e)),T[n]=e,e}export{Pe as importShared,be as importSharedLocal,Le as importSharedRuntime};
+import { _ as __vitePreload } from './preload-helper.4cee51f5.js';
+
+const buildIdentifier = "[0-9A-Za-z-]+";
+const build = `(?:\\+(${buildIdentifier}(?:\\.${buildIdentifier})*))`;
+const numericIdentifier = "0|[1-9]\\d*";
+const numericIdentifierLoose = "[0-9]+";
+const nonNumericIdentifier = "\\d*[a-zA-Z-][a-zA-Z0-9-]*";
+const preReleaseIdentifierLoose = `(?:${numericIdentifierLoose}|${nonNumericIdentifier})`;
+const preReleaseLoose = `(?:-?(${preReleaseIdentifierLoose}(?:\\.${preReleaseIdentifierLoose})*))`;
+const preReleaseIdentifier = `(?:${numericIdentifier}|${nonNumericIdentifier})`;
+const preRelease = `(?:-(${preReleaseIdentifier}(?:\\.${preReleaseIdentifier})*))`;
+const xRangeIdentifier = `${numericIdentifier}|x|X|\\*`;
+const xRangePlain = `[v=\\s]*(${xRangeIdentifier})(?:\\.(${xRangeIdentifier})(?:\\.(${xRangeIdentifier})(?:${preRelease})?${build}?)?)?`;
+const hyphenRange = `^\\s*(${xRangePlain})\\s+-\\s+(${xRangePlain})\\s*$`;
+const mainVersionLoose = `(${numericIdentifierLoose})\\.(${numericIdentifierLoose})\\.(${numericIdentifierLoose})`;
+const loosePlain = `[v=\\s]*${mainVersionLoose}${preReleaseLoose}?${build}?`;
+const gtlt = "((?:<|>)?=?)";
+const comparatorTrim = `(\\s*)${gtlt}\\s*(${loosePlain}|${xRangePlain})`;
+const loneTilde = "(?:~>?)";
+const tildeTrim = `(\\s*)${loneTilde}\\s+`;
+const loneCaret = "(?:\\^)";
+const caretTrim = `(\\s*)${loneCaret}\\s+`;
+const star = "(<|>)?=?\\s*\\*";
+const caret = `^${loneCaret}${xRangePlain}$`;
+const mainVersion = `(${numericIdentifier})\\.(${numericIdentifier})\\.(${numericIdentifier})`;
+const fullPlain = `v?${mainVersion}${preRelease}?${build}?`;
+const tilde = `^${loneTilde}${xRangePlain}$`;
+const xRange = `^${gtlt}\\s*${xRangePlain}$`;
+const comparator = `^${gtlt}\\s*(${fullPlain})$|^$`;
+const gte0 = "^\\s*>=\\s*0.0.0\\s*$";
+function parseRegex(source) {
+  return new RegExp(source);
+}
+function isXVersion(version) {
+  return !version || version.toLowerCase() === "x" || version === "*";
+}
+function pipe(...fns) {
+  return (x) => {
+    return fns.reduce((v, f) => f(v), x);
+  };
+}
+function extractComparator(comparatorString) {
+  return comparatorString.match(parseRegex(comparator));
+}
+function combineVersion(major, minor, patch, preRelease2) {
+  const mainVersion2 = `${major}.${minor}.${patch}`;
+  if (preRelease2) {
+    return `${mainVersion2}-${preRelease2}`;
+  }
+  return mainVersion2;
+}
+function parseHyphen(range) {
+  return range.replace(
+    parseRegex(hyphenRange),
+    (_range, from, fromMajor, fromMinor, fromPatch, _fromPreRelease, _fromBuild, to, toMajor, toMinor, toPatch, toPreRelease) => {
+      if (isXVersion(fromMajor)) {
+        from = "";
+      } else if (isXVersion(fromMinor)) {
+        from = `>=${fromMajor}.0.0`;
+      } else if (isXVersion(fromPatch)) {
+        from = `>=${fromMajor}.${fromMinor}.0`;
+      } else {
+        from = `>=${from}`;
+      }
+      if (isXVersion(toMajor)) {
+        to = "";
+      } else if (isXVersion(toMinor)) {
+        to = `<${+toMajor + 1}.0.0-0`;
+      } else if (isXVersion(toPatch)) {
+        to = `<${toMajor}.${+toMinor + 1}.0-0`;
+      } else if (toPreRelease) {
+        to = `<=${toMajor}.${toMinor}.${toPatch}-${toPreRelease}`;
+      } else {
+        to = `<=${to}`;
+      }
+      return `${from} ${to}`.trim();
+    }
+  );
+}
+function parseComparatorTrim(range) {
+  return range.replace(parseRegex(comparatorTrim), "$1$2$3");
+}
+function parseTildeTrim(range) {
+  return range.replace(parseRegex(tildeTrim), "$1~");
+}
+function parseCaretTrim(range) {
+  return range.replace(parseRegex(caretTrim), "$1^");
+}
+function parseCarets(range) {
+  return range.trim().split(/\s+/).map((rangeVersion) => {
+    return rangeVersion.replace(
+      parseRegex(caret),
+      (_, major, minor, patch, preRelease2) => {
+        if (isXVersion(major)) {
+          return "";
+        } else if (isXVersion(minor)) {
+          return `>=${major}.0.0 <${+major + 1}.0.0-0`;
+        } else if (isXVersion(patch)) {
+          if (major === "0") {
+            return `>=${major}.${minor}.0 <${major}.${+minor + 1}.0-0`;
+          } else {
+            return `>=${major}.${minor}.0 <${+major + 1}.0.0-0`;
+          }
+        } else if (preRelease2) {
+          if (major === "0") {
+            if (minor === "0") {
+              return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${minor}.${+patch + 1}-0`;
+            } else {
+              return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${+minor + 1}.0-0`;
+            }
+          } else {
+            return `>=${major}.${minor}.${patch}-${preRelease2} <${+major + 1}.0.0-0`;
+          }
+        } else {
+          if (major === "0") {
+            if (minor === "0") {
+              return `>=${major}.${minor}.${patch} <${major}.${minor}.${+patch + 1}-0`;
+            } else {
+              return `>=${major}.${minor}.${patch} <${major}.${+minor + 1}.0-0`;
+            }
+          }
+          return `>=${major}.${minor}.${patch} <${+major + 1}.0.0-0`;
+        }
+      }
+    );
+  }).join(" ");
+}
+function parseTildes(range) {
+  return range.trim().split(/\s+/).map((rangeVersion) => {
+    return rangeVersion.replace(
+      parseRegex(tilde),
+      (_, major, minor, patch, preRelease2) => {
+        if (isXVersion(major)) {
+          return "";
+        } else if (isXVersion(minor)) {
+          return `>=${major}.0.0 <${+major + 1}.0.0-0`;
+        } else if (isXVersion(patch)) {
+          return `>=${major}.${minor}.0 <${major}.${+minor + 1}.0-0`;
+        } else if (preRelease2) {
+          return `>=${major}.${minor}.${patch}-${preRelease2} <${major}.${+minor + 1}.0-0`;
+        }
+        return `>=${major}.${minor}.${patch} <${major}.${+minor + 1}.0-0`;
+      }
+    );
+  }).join(" ");
+}
+function parseXRanges(range) {
+  return range.split(/\s+/).map((rangeVersion) => {
+    return rangeVersion.trim().replace(
+      parseRegex(xRange),
+      (ret, gtlt2, major, minor, patch, preRelease2) => {
+        const isXMajor = isXVersion(major);
+        const isXMinor = isXMajor || isXVersion(minor);
+        const isXPatch = isXMinor || isXVersion(patch);
+        if (gtlt2 === "=" && isXPatch) {
+          gtlt2 = "";
+        }
+        preRelease2 = "";
+        if (isXMajor) {
+          if (gtlt2 === ">" || gtlt2 === "<") {
+            return "<0.0.0-0";
+          } else {
+            return "*";
+          }
+        } else if (gtlt2 && isXPatch) {
+          if (isXMinor) {
+            minor = 0;
+          }
+          patch = 0;
+          if (gtlt2 === ">") {
+            gtlt2 = ">=";
+            if (isXMinor) {
+              major = +major + 1;
+              minor = 0;
+              patch = 0;
+            } else {
+              minor = +minor + 1;
+              patch = 0;
+            }
+          } else if (gtlt2 === "<=") {
+            gtlt2 = "<";
+            if (isXMinor) {
+              major = +major + 1;
+            } else {
+              minor = +minor + 1;
+            }
+          }
+          if (gtlt2 === "<") {
+            preRelease2 = "-0";
+          }
+          return `${gtlt2 + major}.${minor}.${patch}${preRelease2}`;
+        } else if (isXMinor) {
+          return `>=${major}.0.0${preRelease2} <${+major + 1}.0.0-0`;
+        } else if (isXPatch) {
+          return `>=${major}.${minor}.0${preRelease2} <${major}.${+minor + 1}.0-0`;
+        }
+        return ret;
+      }
+    );
+  }).join(" ");
+}
+function parseStar(range) {
+  return range.trim().replace(parseRegex(star), "");
+}
+function parseGTE0(comparatorString) {
+  return comparatorString.trim().replace(parseRegex(gte0), "");
+}
+function compareAtom(rangeAtom, versionAtom) {
+  rangeAtom = +rangeAtom || rangeAtom;
+  versionAtom = +versionAtom || versionAtom;
+  if (rangeAtom > versionAtom) {
+    return 1;
+  }
+  if (rangeAtom === versionAtom) {
+    return 0;
+  }
+  return -1;
+}
+function comparePreRelease(rangeAtom, versionAtom) {
+  const { preRelease: rangePreRelease } = rangeAtom;
+  const { preRelease: versionPreRelease } = versionAtom;
+  if (rangePreRelease === void 0 && !!versionPreRelease) {
+    return 1;
+  }
+  if (!!rangePreRelease && versionPreRelease === void 0) {
+    return -1;
+  }
+  if (rangePreRelease === void 0 && versionPreRelease === void 0) {
+    return 0;
+  }
+  for (let i = 0, n = rangePreRelease.length; i <= n; i++) {
+    const rangeElement = rangePreRelease[i];
+    const versionElement = versionPreRelease[i];
+    if (rangeElement === versionElement) {
+      continue;
+    }
+    if (rangeElement === void 0 && versionElement === void 0) {
+      return 0;
+    }
+    if (!rangeElement) {
+      return 1;
+    }
+    if (!versionElement) {
+      return -1;
+    }
+    return compareAtom(rangeElement, versionElement);
+  }
+  return 0;
+}
+function compareVersion(rangeAtom, versionAtom) {
+  return compareAtom(rangeAtom.major, versionAtom.major) || compareAtom(rangeAtom.minor, versionAtom.minor) || compareAtom(rangeAtom.patch, versionAtom.patch) || comparePreRelease(rangeAtom, versionAtom);
+}
+function eq(rangeAtom, versionAtom) {
+  return rangeAtom.version === versionAtom.version;
+}
+function compare(rangeAtom, versionAtom) {
+  switch (rangeAtom.operator) {
+    case "":
+    case "=":
+      return eq(rangeAtom, versionAtom);
+    case ">":
+      return compareVersion(rangeAtom, versionAtom) < 0;
+    case ">=":
+      return eq(rangeAtom, versionAtom) || compareVersion(rangeAtom, versionAtom) < 0;
+    case "<":
+      return compareVersion(rangeAtom, versionAtom) > 0;
+    case "<=":
+      return eq(rangeAtom, versionAtom) || compareVersion(rangeAtom, versionAtom) > 0;
+    case void 0: {
+      return true;
+    }
+    default:
+      return false;
+  }
+}
+function parseComparatorString(range) {
+  return pipe(
+    parseCarets,
+    parseTildes,
+    parseXRanges,
+    parseStar
+  )(range);
+}
+function parseRange(range) {
+  return pipe(
+    parseHyphen,
+    parseComparatorTrim,
+    parseTildeTrim,
+    parseCaretTrim
+  )(range.trim()).split(/\s+/).join(" ");
+}
+function satisfy(version, range) {
+  if (!version) {
+    return false;
+  }
+  const parsedRange = parseRange(range);
+  const parsedComparator = parsedRange.split(" ").map((rangeVersion) => parseComparatorString(rangeVersion)).join(" ");
+  const comparators = parsedComparator.split(/\s+/).map((comparator2) => parseGTE0(comparator2));
+  const extractedVersion = extractComparator(version);
+  if (!extractedVersion) {
+    return false;
+  }
+  const [
+    ,
+    versionOperator,
+    ,
+    versionMajor,
+    versionMinor,
+    versionPatch,
+    versionPreRelease
+  ] = extractedVersion;
+  const versionAtom = {
+    operator: versionOperator,
+    version: combineVersion(
+      versionMajor,
+      versionMinor,
+      versionPatch,
+      versionPreRelease
+    ),
+    major: versionMajor,
+    minor: versionMinor,
+    patch: versionPatch,
+    preRelease: versionPreRelease == null ? void 0 : versionPreRelease.split(".")
+  };
+  for (const comparator2 of comparators) {
+    const extractedComparator = extractComparator(comparator2);
+    if (!extractedComparator) {
+      return false;
+    }
+    const [
+      ,
+      rangeOperator,
+      ,
+      rangeMajor,
+      rangeMinor,
+      rangePatch,
+      rangePreRelease
+    ] = extractedComparator;
+    const rangeAtom = {
+      operator: rangeOperator,
+      version: combineVersion(
+        rangeMajor,
+        rangeMinor,
+        rangePatch,
+        rangePreRelease
+      ),
+      major: rangeMajor,
+      minor: rangeMinor,
+      patch: rangePatch,
+      preRelease: rangePreRelease == null ? void 0 : rangePreRelease.split(".")
+    };
+    if (!compare(rangeAtom, versionAtom)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// eslint-disable-next-line no-undef
+const moduleMap = {'vue':{get:()=>()=>__federation_import(new URL('__federation_shared_vue.86fefd08.js', import.meta.url).href),import:true},'axios':{get:()=>()=>__federation_import(new URL('__federation_shared_axios.be1faeaf.js', import.meta.url).href),import:true},'material-design-icons-iconfont/dist/material-design-icons.css':{get:()=>()=>__federation_import(new URL('__federation_shared_material-design-icons-iconfont/dist/material-design-icons.css.c6bb5834.js', import.meta.url).href),import:true},'socket.io-client':{get:()=>()=>__federation_import(new URL('__federation_shared_socket.io-client.9a03f257.js', import.meta.url).href),import:true},'vue-webrtc-v1':{get:()=>()=>__federation_import(new URL('__federation_shared_vue-webrtc-v1.044125c7.js', import.meta.url).href),import:true},'vuetify':{get:()=>()=>__federation_import(new URL('__federation_shared_vuetify.2861a298.js', import.meta.url).href),import:true},'@mdi/font/css/materialdesignicons.css':{get:()=>()=>__federation_import(new URL('__federation_shared_@mdi/font/css/materialdesignicons.css.cf6a84b2.js', import.meta.url).href),import:true}};
+const moduleCache = Object.create(null);
+async function importShared(name, shareScope = 'default') {
+  return moduleCache[name]
+    ? new Promise((r) => r(moduleCache[name]))
+    : (await getSharedFromRuntime(name, shareScope)) || getSharedFromLocal(name)
+}
+// eslint-disable-next-line
+async function __federation_import(name) {
+  return __vitePreload(() => import(name),true?[]:void 0)
+}
+async function getSharedFromRuntime(name, shareScope) {
+  let module = null;
+  if (globalThis?.__federation_shared__?.[shareScope]?.[name]) {
+    const versionObj = globalThis.__federation_shared__[shareScope][name];
+    const versionKey = Object.keys(versionObj)[0];
+    const versionValue = Object.values(versionObj)[0];
+    if (moduleMap[name]?.requiredVersion) {
+      // judge version satisfy
+      if (satisfy(versionKey, moduleMap[name].requiredVersion)) {
+        module = await (await versionValue.get())();
+      } else {
+        console.log(
+          `provider support ${name}(${versionKey}) is not satisfied requiredVersion(\${moduleMap[name].requiredVersion})`
+        );
+      }
+    } else {
+      module = await (await versionValue.get())();
+    }
+  }
+  if (module) {
+    return flattenModule(module, name)
+  }
+}
+async function getSharedFromLocal(name) {
+  if (moduleMap[name]?.import) {
+    let module = await (await moduleMap[name].get())();
+    return flattenModule(module, name)
+  } else {
+    console.error(
+      `consumer config import=false,so cant use callback shared module`
+    );
+  }
+}
+function flattenModule(module, name) {
+  if (module.default) module = Object.assign({}, module.default, module);
+  moduleCache[name] = module;
+  return module
+}
+
+export { importShared, getSharedFromLocal as importSharedLocal, getSharedFromRuntime as importSharedRuntime };
