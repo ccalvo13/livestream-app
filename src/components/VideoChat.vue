@@ -66,7 +66,7 @@
     import { io } from 'socket.io-client';
     import { ref } from 'vue';
     const socket = io('https://livestream-backend-ng53ixt7xq-as.a.run.app');
-    import { VueWebRTC } from 'vue-webrtc-v1'; 
+    import { VueWebRTC } from 'vue-webrtc'; 
 
     export default {
         name: 'demo-component',
