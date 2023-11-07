@@ -15,6 +15,11 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 const vuetify = createVuetify({
     components,
     directives,
+    icons: {
+        defaults: 'mdi',
+        aliases,
+        sets: { fa, mdi }
+    }
 })
 
 createApp(App).use(vuetify).mount('#app')
