@@ -67,11 +67,18 @@
     import { ref } from 'vue';
     const socket = io('https://livestream-backend-ng53ixt7xq-as.a.run.app');
     import { VueWebRTC } from 'vue-webrtc-v1'; 
+    import { VCard, VBtn, VSnackbar, VDialog, VIcon, VSpacer } from 'vuetify/components'
 
     export default {
         name: 'demo-component',
         components: {
-            'vue-webrtc': VueWebRTC
+            'vue-webrtc': VueWebRTC,
+            VCard,
+            VBtn,
+            VSnackbar,
+            VDialog,
+            VIcon,
+            VSpacer
         },
         data () {
             return {
