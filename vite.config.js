@@ -92,6 +92,15 @@ export default defineConfig({
             rollupNodePolyFill()
         ]
     },
+    external: ['vue', 'vuetify'],
+    output: {
+      // Provide global variables to use in the UMD build
+      // for externalized deps
+      globals: {
+        vue: 'Vue',
+        vuetify: 'Vuetify',
+      },
+    },
     commonjsOptions: {
       transformMixedEsModules: true,
     },
