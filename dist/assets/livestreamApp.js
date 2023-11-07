@@ -3,8 +3,8 @@ import { _ as __vitePreload } from './preload-helper.4cee51f5.js';
 const exportSet = new Set(['Module', '__esModule', 'default', '_export_sfc']);
       let moduleMap = {
 "./App":()=>{
-      dynamicLoadingCss(["style.1396f108.css"]);
-      return __federation_import('./__federation_expose_App.1669ec6c.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
+      dynamicLoadingCss(["style.94d4423c.css"]);
+      return __federation_import('./__federation_expose_App.c62b1b88.js').then(module =>Object.keys(module).every(item => exportSet.has(item)) ? () => module.default : () => module)},};
     const seen = {};
     const dynamicLoadingCss = (cssFilePaths) => {
       const metaUrl = import.meta.url;

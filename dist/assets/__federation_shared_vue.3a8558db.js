@@ -1,3 +1,5 @@
+import { g as global } from './global.db078678.js';
+
 function makeMap(str, expectsLowerCase) {
   const map = /* @__PURE__ */ Object.create(null);
   const list = str.split(",");
@@ -92,7 +94,7 @@ const toNumber = (val) => {
 };
 let _globalThis;
 const getGlobalThis = () => {
-  return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : {});
+  return _globalThis || (_globalThis = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : {});
 };
 
 const GLOBALS_ALLOWED = "Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt,console";
@@ -1907,7 +1909,7 @@ function resolveAsset(type, name, warnMissing = true, maybeSelfReference = false
     const res = (
       // local registration
       // check instance[type] first which is resolved for options API
-      resolve(instance[type] || Component[type], name) || // globalThis registration
+      resolve(instance[type] || Component[type], name) || // global registration
       resolve(instance.appContext[type], name)
     );
     if (!res && maybeSelfReference) {
@@ -3648,7 +3650,7 @@ const PublicInstanceProxyHandlers = {
       accessCache[key] = 4 /* CONTEXT */;
       return ctx[key];
     } else if (
-      // globalThis properties
+      // global properties
       globalProperties = appContext.config.globalProperties, hasOwn(globalProperties, key)
     ) {
       {

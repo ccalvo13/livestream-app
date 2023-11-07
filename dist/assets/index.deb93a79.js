@@ -1,7 +1,7 @@
 import { importShared } from './__federation_fn_import.js';
-import App, { m as makeComponentProps, a as makeTagProps, u as useRender, b as makeBorderProps, c as makeElevationProps, d as makeRoundedProps, e as useBackgroundColor, f as useBorder, g as useElevation, h as useRounded, V as VImg, i as VDefaultsProvider, j as makeVBtnProps, k as VBtn, l as createSimpleFunctional, n as makeDensityProps, o as makeDimensionProps, p as makeLocationProps, q as makePositionProps, r as makeVariantProps, s as useVariant, t as useDensity, v as useDimension, w as useLocation, x as usePosition, y as useTextColor, z as genOverlays, A as VIcon, R as Ripple, B as makeTransitionProps$1, M as MaybeTransition, C as makeGroupProps, D as useGroup, E as makeGroupItemProps, F as makeRouterProps, G as makeSizeProps, H as useSize, I as useGroupItem, J as useLink, K as VAvatar, L as makeVOverlayProps, N as VDialogTransition, O as useScopeId, P as VMenuSymbol, Q as forwardRefs, S as VOverlay, T as makeLoaderProps, U as useLoader, W as nullifyTransforms, X as animate, Y as standardEasing, Z as LoaderSlot, _ as Intersect, $ as getScrollParent, a0 as VBtnToggleSymbol, a1 as VProgressLinear, a2 as makeLazyProps, a3 as useLazy, a4 as makeVImgProps, a5 as makeDelayProps, a6 as useDelay, a7 as useRouter, a8 as toPhysical, a9 as useHydration, aa as useIntersectionObserver, ab as VProgressCircular, ac as VBtnGroup, ad as VBtnToggle, ae as VCard, af as VCardActions, ag as VCardItem, ah as VCardSubtitle, ai as VCardText, aj as VCardTitle, ak as VDialog, al as VSpacer, am as VResponsive, an as VSnackbar, ao as ClickOutside } from './__federation_expose_App.1669ec6c.js';
-import { g as genericComponent, p as propsFactory, u as useRtl, b as breakpoints, m as makeThemeProps, a as provideTheme, c as provideDefaults, d as convertToUnit, e as clamp, f as consoleWarn, h as useProxiedModel, i as useToggleScope, I as IconValue, j as useLocale, k as deepEqual, l as getUid, w as wrapInArray, n as filterInputAttrs, o as matchesSelector, q as omit, E as EventProp, r as getCurrentInstanceName, s as getCurrentInstance, t as defineComponent, v as deprecate, x as getPropertyFromItem, y as pick, z as focusChild, A as focusableChildren, B as getNextElement, C as isOn, D as callEvent, F as useResizeObserver, G as useDisplay, H as createRange, J as IN_BROWSER, K as ensureValidVNode, L as noop, M as useTheme, N as keys, O as getEventCoordinates, P as HSVtoRGB, R as RGBtoHSV, Q as HSVtoHSL, S as HSLtoHSV, T as HSVtoHex, U as HexToHSV, V as has, W as getDecimals, X as keyValues, Y as HSVtoCSS, Z as parseColor, _ as RGBtoCSS, $ as getContrast, a0 as isComposingIgnoreKey, a1 as humanReadableFileSize, a2 as provideLocale, a3 as CircularBuffer, a4 as isObject, a5 as VComponentIcon, a6 as VSvgIcon, a7 as VLigatureIcon, a8 as VClassIcon } from './display.b7bf0594.js';
-import { m as makeLayoutProps, c as createLayout, a as makeLayoutItemProps, u as useLayoutItem, b as useLayout } from './layout.8a58eb9b.js';
+import App, { m as makeComponentProps, a as makeTagProps, u as useRender, b as makeBorderProps, c as makeElevationProps, d as makeRoundedProps, e as useBackgroundColor, f as useBorder, g as useElevation, h as useRounded, V as VImg, i as VDefaultsProvider, j as makeVBtnProps, k as VBtn, l as createSimpleFunctional, n as makeDensityProps, o as makeDimensionProps, p as makeLocationProps, q as makePositionProps, r as makeVariantProps, s as useVariant, t as useDensity, v as useDimension, w as useLocation, x as usePosition, y as useTextColor, z as genOverlays, A as VIcon, R as Ripple, B as makeTransitionProps$1, M as MaybeTransition, C as makeGroupProps, D as useGroup, E as makeGroupItemProps, F as makeRouterProps, G as makeSizeProps, H as useSize, I as useGroupItem, J as useLink, K as VAvatar, L as makeVOverlayProps, N as VDialogTransition, O as useScopeId, P as VMenuSymbol, Q as forwardRefs, S as VOverlay, T as makeLoaderProps, U as useLoader, W as nullifyTransforms, X as animate, Y as standardEasing, Z as LoaderSlot, _ as Intersect, $ as getScrollParent, a0 as VBtnToggleSymbol, a1 as VProgressLinear, a2 as makeLazyProps, a3 as useLazy, a4 as makeVImgProps, a5 as makeDelayProps, a6 as useDelay, a7 as useRouter, a8 as toPhysical, a9 as useHydration, aa as useIntersectionObserver, ab as VProgressCircular, ac as VBtnGroup, ad as VBtnToggle, ae as VCard, af as VCardActions, ag as VCardItem, ah as VCardSubtitle, ai as VCardText, aj as VCardTitle, ak as VDialog, al as VSpacer, am as VResponsive, an as VSnackbar, ao as ClickOutside } from './__federation_expose_App.c62b1b88.js';
+import { g as genericComponent, p as propsFactory, u as useRtl, b as breakpoints, m as makeThemeProps, a as provideTheme, c as provideDefaults, d as convertToUnit, e as clamp, f as consoleWarn, h as useProxiedModel, i as useToggleScope, I as IconValue, j as useLocale, k as deepEqual, l as getUid, w as wrapInArray, n as filterInputAttrs, o as matchesSelector, q as omit, E as EventProp, r as getCurrentInstanceName, s as getCurrentInstance, t as defineComponent, v as deprecate, x as getPropertyFromItem, y as pick, z as focusChild, A as focusableChildren, B as getNextElement, C as isOn, D as callEvent, F as useResizeObserver, G as useDisplay, H as createRange, J as IN_BROWSER, K as ensureValidVNode, L as noop, M as useTheme, N as keys, O as getEventCoordinates, P as HSVtoRGB, R as RGBtoHSV, Q as HSVtoHSL, S as HSLtoHSV, T as HSVtoHex, U as HexToHSV, V as has, W as getDecimals, X as keyValues, Y as HSVtoCSS, Z as parseColor, _ as RGBtoCSS, $ as getContrast, a0 as isComposingIgnoreKey, a1 as humanReadableFileSize, a2 as provideLocale, a3 as CircularBuffer, a4 as isObject, a5 as VComponentIcon, a6 as VSvgIcon, a7 as VLigatureIcon, a8 as VClassIcon, a9 as mdi } from './display.94291a0b.js';
+import { m as makeLayoutProps, c as createLayout, a as makeLayoutItemProps, u as useLayoutItem, b as useLayout } from './layout.974602e2.js';
 
 true&&(function polyfill() {
     const relList = document.createElement('link').relList;
@@ -13153,14 +13153,20 @@ const directives = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty
 
 const vuetify_min = '';
 
+const materialdesignicons = '';
+
+const materialDesignIcons = '';
+
 const {createApp} = await importShared('vue');
 const {createVuetify} = await importShared('vuetify');
-
-
 
 const vuetify = createVuetify({
     components,
     directives,
+    icons: {
+        defaults: 'mdi',
+        sets: { mdi }
+    }
 });
 
 createApp(App).use(vuetify).mount('#app');

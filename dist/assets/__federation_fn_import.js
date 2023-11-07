@@ -357,7 +357,7 @@ function satisfy(version, range) {
 }
 
 // eslint-disable-next-line no-undef
-const moduleMap = {'vue':{get:()=>()=>__federation_import(new URL('__federation_shared_vue.86fefd08.js', import.meta.url).href),import:true},'axios':{get:()=>()=>__federation_import(new URL('__federation_shared_axios.be1faeaf.js', import.meta.url).href),import:true},'material-design-icons-iconfont/dist/material-design-icons.css':{get:()=>()=>__federation_import(new URL('__federation_shared_material-design-icons-iconfont/dist/material-design-icons.css.c6bb5834.js', import.meta.url).href),import:true},'socket.io-client':{get:()=>()=>__federation_import(new URL('__federation_shared_socket.io-client.9a03f257.js', import.meta.url).href),import:true},'vue-webrtc-v1':{get:()=>()=>__federation_import(new URL('__federation_shared_vue-webrtc-v1.044125c7.js', import.meta.url).href),import:true},'vuetify':{get:()=>()=>__federation_import(new URL('__federation_shared_vuetify.2861a298.js', import.meta.url).href),import:true},'@mdi/font/css/materialdesignicons.css':{get:()=>()=>__federation_import(new URL('__federation_shared_@mdi/font/css/materialdesignicons.css.cf6a84b2.js', import.meta.url).href),import:true}};
+const moduleMap = {'vue':{get:()=>()=>__federation_import(new URL('__federation_shared_vue.3a8558db.js', import.meta.url).href),import:true},'vuetify':{get:()=>()=>__federation_import(new URL('__federation_shared_vuetify.27ccea16.js', import.meta.url).href),import:true}};
 const moduleCache = Object.create(null);
 async function importShared(name, shareScope = 'default') {
   return moduleCache[name]
