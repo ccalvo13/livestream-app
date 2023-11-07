@@ -10,6 +10,7 @@ import * as directives from 'vuetify/directives'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
+import {mdi} from 'vuetify/lib/iconsets/mdi';
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 const vuetify = createVuetify({
@@ -17,7 +18,7 @@ const vuetify = createVuetify({
     directives,
     icons: {
         defaults: 'mdi',
-        sets: { fa, mdi }
+        sets: { mdi }
     }
 })
 
