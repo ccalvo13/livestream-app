@@ -14,6 +14,7 @@ export default defineConfig({
         template: {transformAssetUrls}
     }),
     viteCommonjs(),
+    vuetify(),
     federation({
       name: "livestream",
       filename: "livestreamApp.js",
