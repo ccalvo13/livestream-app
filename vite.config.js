@@ -5,16 +5,12 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import federation from '@originjs/vite-plugin-federation'
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue({
-        template: {transformAssetUrls}
-    }),
+    vue(),
     viteCommonjs(),
-    vuetify(),
     federation({
       name: "livestream",
       filename: "livestreamApp.js",
