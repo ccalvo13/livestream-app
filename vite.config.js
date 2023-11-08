@@ -1,31 +1,42 @@
 import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 import federation from '@originjs/vite-plugin-federation'
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+        template: {transformAssetUrls}
+    }),
     viteCommonjs(),
+    vuetify({
+      autoImport: true,
+    }),
     federation({
       name: "livestream",
       filename: "livestreamApp.js",
       exposes: {
         "./App": "./src/App.vue",
       },
-      shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
+      // shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
+      shared: ["vue", "axios", "socket.io-client", "vue-webrtc-v1", "vuetify"],
     })
   ],
   define: {
     'process.env': {},
     global: 'globalThis'
   },
+  external: ['vue', 'vuetify'],
   resolve: {
     alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '~': fileURLToPath(new URL('./node_modules', import.meta.url)),
         // This Rollup aliases are extracted from @esbuild-plugins/node-modules-polyfill,
         // see https://github.com/remorses/esbuild-plugins/blob/master/node-modules-polyfill/src/polyfills.ts
         // process and buffer are excluded because already managed
@@ -83,20 +94,25 @@ export default defineConfig({
   build: {
     target: 'esnext',
     rollupOptions: {
-        plugins: [
-            // Enable rollup polyfills plugin
-            // used during production bundling
-            rollupNodePolyFill()
-        ]
-    },
-    external: ['vue', 'vuetify'],
-    output: {
-      // Provide global variables to use in the UMD build
-      // for externalized deps
-      globals: {
-        vue: 'Vue',
-        vuetify: 'Vuetify',
-      },
+      plugins: [
+          // Enable rollup polyfills plugin
+          // used during production bundling
+          rollupNodePolyFill()
+      ],
+      external: ['vue', 'vuetify'],
+      output: {
+        globals: {
+          // Split external library from transpiled code.
+          vue: ['vue'],
+          vuetify: [
+            'vuetify',
+            'vuetify/components',
+            'vuetify/directives',
+            // 'vuetify/lib/labs',
+          ],
+          materialdesignicons: ['@mdi/font/css/materialdesignicons.css'],
+        }
+      }
     },
     commonjsOptions: {
       transformMixedEsModules: true,
