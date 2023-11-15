@@ -10,6 +10,9 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 8085,
+  },
   plugins: [
     vue({
         template: {transformAssetUrls}
@@ -24,8 +27,8 @@ export default defineConfig({
       exposes: {
         "./App": "./src/App.vue",
       },
-      // shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
-      shared: ["vue", "axios", "socket.io-client", "vue-webrtc-v1", "vuetify"],
+      shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
+      // shared: ["vue", "vuetify"],
     })
   ],
   define: {
