@@ -424,9 +424,9 @@
     height: 60px !important;
 }
 .video-webrtc-controls {
-    position: relative;
+    position: absolute;
     left: 0;
-    right: 0;
+    right: 20%;
     bottom: 60px;
     margin: auto;
 }
