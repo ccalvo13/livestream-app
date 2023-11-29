@@ -1,63 +1,84 @@
 <template>
   <!-- <div data-app id="app"> -->
-      <div>
-        <div>
-          <form>
-            <!-- <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="room-input">
-                Room ID
-              </label>
-              <input v-model="roomId" placeholder="Enter room ID" id="room-input" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-            </div> -->
-            <div class="video-container"> 
-              <vue-webrtc id="call-canvas" :roomId="roomId" ref="webrtc" v-on:share-started="shareStarted"  class="w-full video-webrtc" v-on:share-stopped="leftRoom" v-on:left-room="leftRoom" v-on:joined-room="joinedRoom" width="100%"/>
-            </div>
-            <div class="video-webrtc-controls" v-if="hasJoined">
-              <!-- <button type="button" @click="copyClipboard" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Share Meeting</button> -->
-              
-              <v-btn @click="onHandleVideoOn" class="mx-2 bg-primary" size="x-large"><v-icon>{{videoOn ?  'mdi-video-outline': 'mdi-video-off-outline' }} </v-icon></v-btn>
-              <v-btn @click="onHandleMicOn" class="mx-2 bg-primary" size="x-large"><v-icon>{{micOn ?  'mdi-microphone': 'mdi-microphone-off' }} </v-icon></v-btn>
-              <!-- <v-btn @click="screenShare" class="mx-2" size="x-large">Screen Share</v-btn> -->
-              <v-btn @click="toggleRoom" class="mx-2 bg-red" size="x-large" ><v-icon>mdi-phone-hangup</v-icon></v-btn>
-              <v-dialog v-model="dialog" width="auto">
-                <v-card>
-                  <v-card-title class="text-h5">
-                    End the call or just leave?
-                  </v-card-title>
-                  <v-card-text>You can just leave the call if you don't want to end it for everyone else</v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn variant="text" @click="meetingRoomEnd()" style="margin-right: 15px">
-                      Just leave the call
-                    </v-btn>
-                    <v-btn variant="text" @click="meetingRoomEndForEveryone()">
-                      End the call for everyone
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-               <v-snackbar
-                v-model="snackbar"
-                :timeout=3000
-              >
-                {{ textUserStatus }}
 
-                <template v-slot:actions>
-                  <v-btn
-                    color="blue"
-                    variant="text"
-                    @click="snackbar = false"
+    <v-container
+      fluid 
+      class="ma-0 pa-0 fill-height"
+    >
+      <v-row class="no-gutters elevation-4">
+        <v-col
+          class="ma-0 pa-0 flex-grow-1 flex-shrink-0"
+          style="border-right: 1px solid #0000001f;"
+        >
+          <div>
+            <div>
+              <form>
+                <!-- <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="room-input">
+                    Room ID
+                  </label>
+                  <input v-model="roomId" placeholder="Enter room ID" id="room-input" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                </div> -->
+                <div class="video-container"> 
+                  <vue-webrtc id="call-canvas" :roomId="roomId" ref="webrtc" v-on:share-started="shareStarted"  class="w-full video-webrtc" v-on:share-stopped="leftRoom" v-on:left-room="leftRoom" v-on:joined-room="joinedRoom" width="100%"/>
+                </div>
+                <div class="video-webrtc-controls" v-if="hasJoined">
+                  <!-- <button type="button" @click="copyClipboard" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Share Meeting</button> -->
+                  
+                  <v-btn @click="onHandleVideoOn" class="mx-2 bg-primary" size="x-large"><v-icon>{{videoOn ?  'mdi-video-outline': 'mdi-video-off-outline' }} </v-icon></v-btn>
+                  <v-btn @click="onHandleMicOn" class="mx-2 bg-primary" size="x-large"><v-icon>{{micOn ?  'mdi-microphone': 'mdi-microphone-off' }} </v-icon></v-btn>
+                  <!-- <v-btn @click="screenShare" class="mx-2" size="x-large">Screen Share</v-btn> -->
+                  <v-btn @click="toggleRoom" class="mx-2 bg-red" size="x-large" ><v-icon>mdi-phone-hangup</v-icon></v-btn>
+                  <v-dialog v-model="dialog" width="auto">
+                    <v-card>
+                      <v-card-title class="text-h5">
+                        End the call or just leave?
+                      </v-card-title>
+                      <v-card-text>You can just leave the call if you don't want to end it for everyone else</v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn variant="text" @click="meetingRoomEnd()" style="margin-right: 15px">
+                          Just leave the call
+                        </v-btn>
+                        <v-btn variant="text" @click="meetingRoomEndForEveryone()">
+                          End the call for everyone
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                  <v-snackbar
+                    v-model="snackbar"
+                    :timeout=3000
                   >
-                    Close
-                  </v-btn>
-                </template>
-              </v-snackbar>
-            </div>
-          </form>
+                    {{ textUserStatus }}
 
-        </div>
- 
-    </div>
+                    <template v-slot:actions>
+                      <v-btn
+                        color="blue"
+                        variant="text"
+                        @click="snackbar = false"
+                      >
+                        Close
+                      </v-btn>
+                    </template>
+                  </v-snackbar>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </v-col>
+
+
+        <v-col
+          cols="12" sm="3"
+          class="flex-grow-1 flex-shrink-0"
+          style="height: 100vh"
+        >
+          <LiveChat :roomId="roomId" :sessionId="userStream.id"/>
+        </v-col>
+      </v-row>
+    </v-container>
   <!-- </div> -->
 </template>
 
@@ -65,9 +86,10 @@
     import axios from 'axios';
     import { io } from 'socket.io-client';
     import { ref } from 'vue';
-    const socket = io('https://livestream-backend-1z80.onrender.com');
+    const socket = io('http://localhost:3000');
     import { VueWebRTC } from 'vue-webrtc-v1'; 
     import { VCard, VBtn, VSnackbar, VDialog, VIcon, VSpacer } from 'vuetify/components'
+    import LiveChat from './LiveChat.vue'
 
     export default {
         name: 'demo-component',
@@ -78,7 +100,8 @@
             VSnackbar,
             VDialog,
             VIcon,
-            VSpacer
+            VSpacer,
+            LiveChat
         },
         data () {
             return {
@@ -90,7 +113,7 @@
             mediaRecorder: {},
             chunks: [],
             userStream: {},
-            // socket: io('https://livestream-backend-1z80.onrender.com'),
+            // socket: io('http://localhost:3000'),
             audioContext: null,
             videoContainer: null,
             stream: null,
@@ -164,8 +187,8 @@
 
                     this.isRecording = false;
                 }
-                await axios.delete( `https://livestream-backend-1z80.onrender.com/users/list/${this.roomId}/${this.userStream.id}`);
-                await axios.post( `https://livestream-backend-1z80.onrender.com/files`, {fileName: this.roomId});
+                await axios.delete( `http://localhost:3000/users/list/${this.roomId}/${this.userStream.id}`);
+                await axios.post( `http://localhost:3000/files`, {fileName: this.roomId});
                 socket.emit('usersList', { roomId: this.roomId });
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
             
@@ -269,7 +292,7 @@
                 try {
                     
                     if(this.hasJoined) {
-                    const { data } = await axios.get( `https://livestream-backend-1z80.onrender.com/users/${this.userStream.id}`);
+                    const { data } = await axios.get( `http://localhost:3000/users/${this.userStream.id}`);
                     console.log('data: ', data);
                     if(data.data.isHost){
                         this.dialog = true;
@@ -285,7 +308,7 @@
                     this.getUserList();
                     
                     // Capture the entire screen
-                    const { data } = await axios.get( `https://livestream-backend-1z80.onrender.com/users/${this.userStream.id}`);
+                    const { data } = await axios.get( `http://localhost:3000/users/${this.userStream.id}`);
                     console.log('data isHost: ', data, this.userStream.id);
                     
                     this.mediaStream = await navigator.mediaDevices.getDisplayMedia({ video: { mediaSource: 'screen' }, audio: true, preferCurrentTab:true  });
@@ -320,7 +343,7 @@
                 }
             },
             async getUserList(){
-                // const { data } = await axios.get( `https://livestream-backend-1z80.onrender.com/users/list/${this.roomId}`);
+                // const { data } = await axios.get( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}`);
                 // this.userList = data;
             },
             screenShare () {
@@ -384,14 +407,14 @@
                 }
             },
             async meetingRoomEndForEveryone() {
-                const { data } = await axios.delete( `https://livestream-backend-1z80.onrender.com/users/list/${this.roomId}/${this.streamId}`);
+                const { data } = await axios.delete( `http://localhost:3000/users/list/${this.roomId}/${this.streamId}`);
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
                 console.log('this.streamId}: ', this.streamId);
                 console.log('meetingRoomEndForEveryone: ', data);
                 this.onDownloadLocal()
             },
             async meetingRoomEnd() {
-                const { data } = await axios.delete( `https://livestream-backend-1z80.onrender.com/users/list/${this.roomId}`);
+                const { data } = await axios.delete( `http://localhost:3000/users/list/${this.roomId}`);
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
                 console.log('meetingRoomEnd: ', data);
                 this.onDownloadLocal()
