@@ -56,7 +56,7 @@
                                 dark
                                 style="height:auto;white-space: normal;"
                                 class="pa-4 mb-2"
-                                v-on="on"
+                                v-on:load="on"
                               >
                                 {{ chat.message }}
                                 <!-- <sub
@@ -75,11 +75,10 @@
                         </v-menu>
                       </div>
                     </div>
-
-                    <div v-if="typingDisplay">{{ typingDisplay }}</div>
                   </div>
                 </template>
               </v-card-text>
+              <div v-if="typingDisplay">{{ typingDisplay }}</div>
               <v-card-text class="align-end flex-shrink-1">
                 <v-text-field
                   v-model="messageText"
@@ -127,22 +126,24 @@ export default {
     };
   },
   created() {
-    socket.emit('findAllChat', {}, (response) => {
-        console.log('chats', response)
-      this.chats = response;
-    });
-
-    socket.on('message', (chat) => {
-      this.chats.push(chat);
-    });
-
-    socket.on('typing', ({ sessionId, isTyping }) => {
-      if (isTyping) {
+    socket.on('typing', ({ sessionId, roomId, isTyping }) => {
+      if (isTyping && roomId === this.roomId) {
         this.typingDisplay = `${sessionId} is typing...`;
       } else {
         this.typingDisplay = '';
       }
-    });
+    }),
+    socket.on('chat', ({ chats}) => {
+      this.chats = chats;
+    })
+  },
+  watch: { 
+    roomId: function(newVal) { // watch it
+      socket.emit('findAllChat', { roomId: newVal }, (response) => {
+        console.log('chats', response)
+        this.chats = response;
+      });
+    },
   },
   methods: {
     // join() {
@@ -151,15 +152,15 @@ export default {
     //   });
     // },
     sendMessage() {
-        console.log('session id', this.sessionId)
-        socket.emit('chat', { roomId: this.roomId, sessionId: this.sessionId, message: this.messageText }, () => {
+      socket.emit('chat', { roomId: this.roomId, sessionId: this.sessionId, message: this.messageText }, (response) => {
+        this.chats = response;
         this.messageText = '';
       });
     },
     emitTyping() {
-      socket.emit('typing', { isTyping: true });
+      socket.emit('typing', { isTyping: true, sessionId: this.sessionId, roomId: this.roomId });
       setTimeout(() => {
-        socket.emit('typing', { isTyping: false });
+        socket.emit('typing', { isTyping: false, sessionId: this.sessionId, roomId: this.roomId });
       }, 2000);
     },
     dateTime(value) {

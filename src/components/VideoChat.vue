@@ -88,19 +88,12 @@
     import { ref } from 'vue';
     const socket = io('http://localhost:3000');
     import { VueWebRTC } from 'vue-webrtc-v1'; 
-    import { VCard, VBtn, VSnackbar, VDialog, VIcon, VSpacer } from 'vuetify/components'
     import LiveChat from './LiveChat.vue'
 
     export default {
         name: 'demo-component',
         components: {
             'vue-webrtc': VueWebRTC,
-            VCard,
-            VBtn,
-            VSnackbar,
-            VDialog,
-            VIcon,
-            VSpacer,
             LiveChat
         },
         data () {
@@ -343,7 +336,7 @@
                 }
             },
             async getUserList(){
-                // const { data } = await axios.get( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}`);
+                // const { data } = await axios.get( `http://localhost:3000/users/list/${this.roomId}`);
                 // this.userList = data;
             },
             screenShare () {
