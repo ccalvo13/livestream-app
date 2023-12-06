@@ -86,7 +86,7 @@
     import axios from 'axios';
     import { io } from 'socket.io-client';
     import { ref } from 'vue';
-    const socket = io('http://localhost:3000');
+    const socket = io('https://livestream-backend-98b8.onrender.com');
     import { VueWebRTC } from 'vue-webrtc-v1'; 
     import LiveChat from './LiveChat.vue'
 
@@ -106,7 +106,7 @@
             mediaRecorder: {},
             chunks: [],
             userStream: {},
-            // socket: io('http://localhost:3000'),
+            // socket: io('https://livestream-backend-98b8.onrender.com'),
             audioContext: null,
             videoContainer: null,
             stream: null,
@@ -180,8 +180,8 @@
 
                     this.isRecording = false;
                 }
-                await axios.delete( `http://localhost:3000/users/list/${this.roomId}/${this.userStream.id}`);
-                await axios.post( `http://localhost:3000/files`, {fileName: this.roomId});
+                await axios.delete( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}/${this.userStream.id}`);
+                await axios.post( `https://livestream-backend-98b8.onrender.com/files`, {fileName: this.roomId});
                 socket.emit('usersList', { roomId: this.roomId });
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
             
@@ -285,7 +285,7 @@
                 try {
                     
                     if(this.hasJoined) {
-                    const { data } = await axios.get( `http://localhost:3000/users/${this.userStream.id}`);
+                    const { data } = await axios.get( `https://livestream-backend-98b8.onrender.com/users/${this.userStream.id}`);
                     console.log('data: ', data);
                     if(data.data.isHost){
                         this.dialog = true;
@@ -301,7 +301,7 @@
                     this.getUserList();
                     
                     // Capture the entire screen
-                    const { data } = await axios.get( `http://localhost:3000/users/${this.userStream.id}`);
+                    const { data } = await axios.get( `https://livestream-backend-98b8.onrender.com/users/${this.userStream.id}`);
                     console.log('data isHost: ', data, this.userStream.id);
                     
                     this.mediaStream = await navigator.mediaDevices.getDisplayMedia({ video: { mediaSource: 'screen' }, audio: true, preferCurrentTab:true  });
@@ -336,7 +336,7 @@
                 }
             },
             async getUserList(){
-                // const { data } = await axios.get( `http://localhost:3000/users/list/${this.roomId}`);
+                // const { data } = await axios.get( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}`);
                 // this.userList = data;
             },
             screenShare () {
@@ -400,14 +400,14 @@
                 }
             },
             async meetingRoomEndForEveryone() {
-                const { data } = await axios.delete( `http://localhost:3000/users/list/${this.roomId}/${this.streamId}`);
+                const { data } = await axios.delete( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}/${this.streamId}`);
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
                 console.log('this.streamId}: ', this.streamId);
                 console.log('meetingRoomEndForEveryone: ', data);
                 this.onDownloadLocal()
             },
             async meetingRoomEnd() {
-                const { data } = await axios.delete( `http://localhost:3000/users/list/${this.roomId}`);
+                const { data } = await axios.delete( `https://livestream-backend-98b8.onrender.com/users/list/${this.roomId}`);
                 socket.emit('deleteUser', { roomId: this.roomId, sessionId: this.userStream.id });
                 console.log('meetingRoomEnd: ', data);
                 this.onDownloadLocal()

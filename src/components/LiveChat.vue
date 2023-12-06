@@ -105,7 +105,7 @@
 import { io } from 'socket.io-client';
 import moment from 'moment';
 
-const socket = io('http://localhost:3000');
+const socket = io('https://livestream-backend-98b8.onrender.com');
 
 export default {
     props: {
