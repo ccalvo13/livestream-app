@@ -39,13 +39,13 @@
               </v-card-title>
               <v-card-text class="flex-grow-1 overflow-y-auto">
                 <template v-for="chat in chats" :key="chat">
-                  <div v-if="chat.roomId === roomId" :class="chat.sessionId === sessionId ? 'd-flex justify-end' : 'd-flex justify-start'">
+                  <!-- <div v-if="chat.roomId === roomId" :class="chat.sessionId === sessionId ? 'd-flex justify-end' : 'd-flex justify-start'">
                     <div>
                       <div class="sender d-flex">
                         <h4 class="mr-2">{{ chat.sessionId }}</h4>
                         <span class="text-caption text-disabled">{{ dateTime(chat.creationDate) }}</span>
                       </div>
-                      <div :class="chat.sessionId === sessionId ? 'message-content d-flex justify-end' : 'message-content d-flex justify-start'">
+                      <div :class="chat.sessionId === sessionId ? 'message-content d-flex justify-end current-user' : 'message-content d-flex justify-start other-user'">
                         <v-menu offset-y>
                           <template v-slot:activator="{ on }">
                             <v-hover
@@ -55,14 +55,12 @@
                                 :color="chat.sessionId === sessionId ? 'primary' : ''"
                                 dark
                                 style="height:auto;white-space: normal;"
-                                class="pa-4 mb-2"
+                                class="pa-4 mb-2 d-flex justify-start"
                                 v-on:load="on"
                               >
+                                <h4 class="mr-2">{{ chat.sessionId }}</h4>
                                 {{ chat.message }}
-                                <!-- <sub
-                                  class="ml-2"
-                                  style="font-size: 0.5rem;"
-                                >{{ msg.created_at }}</sub> -->
+                                <span class="text-caption text-disabled">{{ dateTime(chat.creationDate) }}</span>
                                 <v-icon
                                   v-if="hover"
                                   small
@@ -75,7 +73,22 @@
                         </v-menu>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
+                  <article :class="chat.sessionId === sessionId ? 'message-content d-flex justify-end current-user msg-container msg-remote' : 'message-content d-flex justify-start other-user msg-container msg-remote'" >
+                    <div :style="chat.sessionId === sessionId ? {'background':'#90CAF9'} : {'background':'#FFCDD2'}" class="msg-box">
+                      <div class="flr">
+                          <h4 class="bot-title">
+                            {{ chat.sessionId }}
+                          </h4>
+                        <div class="messages">
+                          <p class="msg" id="">
+                            {{ chat.message }}
+                          </p>
+                        </div>
+                        <span class="timestamp">{{ dateTime(chat.creationDate) }}</span>
+                      </div>
+                    </div>
+                  </article>
                 </template>
               </v-card-text>
               <div v-if="typingDisplay">{{ typingDisplay }}</div>
@@ -184,5 +197,45 @@ export default {
 
 .message-container {
   flex: 1;
+}
+.msg-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+.msg-box {
+  display: flex;
+  padding: 10px 10px 0 10px;
+  border-radius: 6px;
+  max-width: 80%;
+  width: auto;
+  float: left;
+  box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+.flr {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 50px);
+  text-align: left !important;
+}
+.timestamp {
+  color: '#fff';
+  font-size: 8pt;
+  margin-bottom: 10px;
+}
+.messages {
+  flex: 1 0 auto;
+}
+.msg {
+  display: inline-block;
+  font-size: 11pt;
+  line-height: 13pt;
+  margin: 0 0 4px 0;
+}
+.msg:first-of-type {
+  margin-top: 8px;
 }
 </style>
