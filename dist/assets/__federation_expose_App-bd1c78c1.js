@@ -1,0 +1,1 @@
+import{importShared as r}from"./__federation_fn_import.js";const p=(e,t)=>{const o=e.__vccOpts||e;for(const[_,c]of t)o[_]=c;return o},s={name:"App"},{resolveComponent:a,openBlock:l,createBlock:u}=await r("vue");function v(e,t,o,_,c,d){const n=a("router-view");return l(),u(n)}const i=p(s,[["render",v],["__scopeId","data-v-02fc1181"]]);export{p as _,i as default};

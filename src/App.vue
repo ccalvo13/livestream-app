@@ -1,9 +1,11 @@
-<script setup>
-import VideoChat from './components/VideoChat.vue'
+<script>
+export default {
+    name: 'App'
+}
 </script>
 
 <template>
-  <VideoChat />
+  <router-view />
 </template>
 
 <style scoped>
