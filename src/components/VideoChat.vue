@@ -91,7 +91,7 @@
     import LiveChat from './LiveChat.vue'
 
     export default {
-        name: 'demo-component',
+        name: 'video-chat',
         components: {
             'vue-webrtc': VueWebRTC,
             LiveChat
