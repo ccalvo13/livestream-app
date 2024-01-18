@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/components/HomePage.vue'),
+    component: () => import('@/components/VideoChat.vue'),
   },
   {
     path: '/video-chat',

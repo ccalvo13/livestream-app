@@ -27,9 +27,9 @@ export default defineConfig({
       exposes: {
         "./App": "./src/App.vue",
       },
-      // remotes: {
-      //   chatwidget: "http://localhost:8084/dist/assets/remoteEntry.js"
-      // },
+      remotes: {
+        chatwidget: "http://localhost:8084/dist/assets/remoteEntry.js"
+      },
       shared: ["vue", "axios", "material-design-icons-iconfont/dist/material-design-icons.css", "socket.io-client", "vue-webrtc-v1", "vuetify", "@mdi/font/css/materialdesignicons.css"],
       // shared: ["vue", "vuetify"],
     })
